@@ -6,7 +6,7 @@ with
 
 source as (
 
-    select * from ${ref('source_raw_items')}
+    select * from ${ref('raw_items')}
 
 ),
 

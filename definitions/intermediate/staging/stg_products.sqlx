@@ -2,15 +2,20 @@ config {
   type: "table"
 }
 
+js {
+  function cents_to_dollars(cents) {
+    return `cast(${cents} as float64) / 100`;
+  }
+}
+
 with
 
 source as (
-    select * from ${ref('source_raw_products')}
+    select * from ${ref('raw_products')}
 ),
 
 renamed as (
     select
-
         ----------  ids
         sku as product_id,
 
@@ -20,12 +25,12 @@ renamed as (
         description as product_description,
 
         ---------- numerics
-        cast(price as float) as product_price,
+        ${cents_to_dollars('price')} as product_price,
 
         ---------- booleans
         coalesce(type = 'jaffle', false) as is_food_item,
         coalesce(type = 'beverage', false) as is_drink_item
-
     from source
 )
+
 select * from renamed

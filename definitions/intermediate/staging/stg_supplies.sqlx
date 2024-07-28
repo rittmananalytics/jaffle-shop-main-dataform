@@ -6,7 +6,7 @@ with
 
 source as (
 
-    select * from ${ref('source_raw_supplies')}
+    select * from ${ref('raw_supplies')}
 
 ),
 
@@ -15,7 +15,7 @@ renamed as (
     select
 
         ----------  ids
-        CONCAT(CAST(id AS STRING), CAST(sku AS STRING)) as supply_uuid, -- Concatenation can act as a unique identifier
+        CONCAT(id, sku) as supply_uuid,
         id as supply_id,
         sku as product_id,
 
@@ -23,7 +23,7 @@ renamed as (
         name as supply_name,
 
         ---------- numerics
-        cost/100 as supply_cost,  -- Manually converted cents to dollars
+        cents_to_dollars(cost) as supply_cost,
 
         ---------- booleans
         perishable as is_perishable_supply

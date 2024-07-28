@@ -1,11 +1,16 @@
-config {
-  type: "table",
+js {
+  config {
+    type: "table"
+  }
 }
 
-with 
-
-products as (
-    select * from ${ref('stg_products')}
+with products as (
+    select 
+        field1 as alias1,
+        field2 as alias2,
+        ...
+        fieldN as aliasN
+    from ${ref('stg_products')}
 )
 
 select * from products
