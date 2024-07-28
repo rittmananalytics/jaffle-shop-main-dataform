@@ -2,8 +2,8 @@ config {
   type: "table"
 }
 
-js {
-  const supplies = sql.from('stg_supplies');
-}
+with supplies as (
+    select * from ${ref('stg_supplies')}
+)
 
-select * from ${supplies}
+select * from supplies

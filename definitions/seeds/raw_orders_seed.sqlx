@@ -1,10 +1,10 @@
 
-config {
-  type: "declaration",
-  database: dataform.projectConfig.defaultDatabase,
-  schema: dataform.projectConfig.vars.seed_schema || dataform.projectConfig.defaultSchema,
-  name: "raw_orders"
-}
+    config {
+      type: "declaration",
+      database: dataform.projectConfig.defaultDatabase,
+      schema: dataform.projectConfig.vars.seed_schema || dataform.projectConfig.defaultSchema,
+      name: "raw_orders"
+    }
 
-SELECT * FROM ${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.vars.seed_schema || dataform.projectConfig.defaultSchema}.raw_orders
+    SELECT * FROM ${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.vars.seed_schema || dataform.projectConfig.defaultSchema}.raw_orders
         

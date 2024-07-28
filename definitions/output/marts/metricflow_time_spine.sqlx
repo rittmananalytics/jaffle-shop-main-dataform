@@ -3,24 +3,24 @@ config {
 }
 
 -- metricflow_time_spine.sql
+with
 
-WITH days AS (
-    -- Generates a series of dates from '2000-01-01' up to CURRENT_DATE()
-    SELECT 
-        the_date AS date_day
-    FROM
-        UNNEST(GENERATE_DATE_ARRAY(DATE('2000-01-01'), CURRENT_DATE())) AS the_date       
+days as (
+
+    --for BQ adapters use "DATE('01/01/2000','mm/dd/yyyy')"
+    {{ dataform.coding_utils.generate_series({ 
+      n_dateparts: 365*10,
+      datepart: "day"
+    }) }}
+
 ),
 
-cast_to_date AS (
+cast_to_date as (
 
-    SELECT 
-        CAST(date_day AS DATE) AS date_day
+    select cast(date_day as date) as date_day
 
-    FROM 
-        days
+    from days
+
 )
 
-SELECT * 
-FROM 
-    cast_to_date
+select * from cast_to_date
