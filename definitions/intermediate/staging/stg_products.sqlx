@@ -1,0 +1,39 @@
+config {
+  type: "table"
+}
+
+with
+
+source as (
+
+    select * from ${ref('raw_products')}
+
+),
+
+renamed as (
+
+    select
+
+        ----------  ids
+        sku as product_id,
+
+        ---------- text
+        name as product_name,
+        type as product_type,
+        description as product_description,
+
+
+        ---------- numerics
+        {{ cents_to_dollars('price') }} as product_price,  -- check if the required js function exists
+
+
+        ---------- booleans
+        coalesce(type = 'jaffle', false) as is_food_item, -- ensure 'jaffle' is an accurate product type
+
+        coalesce(type = 'beverage', false) as is_drink_item  -- ensure 'beverage' is an accurate product type
+
+    from source
+
+)
+
+select * from renamed

@@ -1,0 +1,26 @@
+config {
+  type: "table"
+}
+
+-- metricflow_time_spine.sql
+
+WITH days AS (
+    -- Generates a series of dates from '2000-01-01' up to CURRENT_DATE()
+    SELECT 
+        the_date AS date_day
+    FROM
+        UNNEST(GENERATE_DATE_ARRAY(DATE('2000-01-01'), CURRENT_DATE())) AS the_date       
+),
+
+cast_to_date AS (
+
+    SELECT 
+        CAST(date_day AS DATE) AS date_day
+
+    FROM 
+        days
+)
+
+SELECT * 
+FROM 
+    cast_to_date
