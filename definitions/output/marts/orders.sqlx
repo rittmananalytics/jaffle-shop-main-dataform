@@ -12,7 +12,7 @@ orders as (
 
 order_items as (
 
-    select * from ${ref('order_items')}
+    select * from ${self()}
 
 ),
 
@@ -26,13 +26,13 @@ order_items_summary as (
         count(order_item_id) as count_order_items,
         sum(
             case
-                when is_food_item then 1
+                when order_items.is_food_item then 1
                 else 0
             end
         ) as count_food_items,
         sum(
             case
-                when is_drink_item then 1
+                when order_items.is_drink_item then 1
                 else 0
             end
         ) as count_drink_items

@@ -15,7 +15,7 @@ renamed as (
     select
 
         ----------  ids
-        {{ dbt_utils.generate_surrogate_key(['id', 'sku']) }} as supply_uuid,
+        CONCAT(CAST(id AS STRING), CAST(sku AS STRING)) as supply_uuid, -- Concatenation can act as a unique identifier
         id as supply_id,
         sku as product_id,
 
@@ -23,7 +23,7 @@ renamed as (
         name as supply_name,
 
         ---------- numerics
-        {{ cents_to_dollars('cost') }} as supply_cost,
+        cost/100 as supply_cost,  -- Manually converted cents to dollars
 
         ---------- booleans
         perishable as is_perishable_supply

@@ -24,7 +24,7 @@ renamed as (
         tax_rate,
 
         ---------- timestamps
-        DATE_TRUNC('opened_at', 'day') as opened_date
+        DATE_TRUNC('day', opened_at) as opened_date
 
     from source
 
