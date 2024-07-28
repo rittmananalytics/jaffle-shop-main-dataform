@@ -5,13 +5,17 @@ config {
 with
 
 source as (
-    select * from ${ref('raw_supplies')}
+
+    select * from ${ref('source_source_raw_supplies')}
+
 ),
 
 renamed as (
+
     select
+
         ----------  ids
-        concat(cast(id as string), '-', cast(sku as string)) as supply_uuid,
+        {{ dbt_utils.generate_surrogate_key(['id', 'sku']) }} as supply_uuid,
         id as supply_id,
         sku as product_id,
 
@@ -19,12 +23,13 @@ renamed as (
         name as supply_name,
 
         ---------- numerics
-        cost / 100.0 as supply_cost,
+        {{ cents_to_dollars('cost') }} as supply_cost,
 
         ---------- booleans
         perishable as is_perishable_supply
 
     from source
+
 )
 
 select * from renamed

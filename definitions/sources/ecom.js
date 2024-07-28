@@ -1,45 +1,39 @@
 // Source: ecom
 
 
-    const raw_customers = declare({
+    const source_raw_customers = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_customers"
     });
-
     
-    const raw_orders = declare({
+    const source_raw_orders = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_orders"
     });
-
     
-    const raw_items = declare({
+    const source_raw_items = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_items"
     });
-
     
-    const raw_stores = declare({
+    const source_raw_stores = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_stores"
     });
-
     
-    const raw_products = declare({
+    const source_raw_products = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_products"
     });
-
     
-    const raw_supplies = declare({
+    const source_raw_supplies = declare({
         database: dataform.projectConfig.defaultDatabase,
         schema: "raw",
         name: "raw_supplies"
     });
-
-    module.exports = { raw_customers, raw_orders, raw_items, raw_stores, raw_products, raw_supplies };
+    module.exports = { source_raw_customers, source_raw_orders, source_raw_items, source_raw_stores, source_raw_products, source_raw_supplies };

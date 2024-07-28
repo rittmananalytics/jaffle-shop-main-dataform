@@ -2,8 +2,12 @@ config {
   type: "table"
 }
 
-with supplies as (
-    select * from ${ref('stg_supplies')}
+with
+
+supplies as (
+
+    select * from ${ref('source_stg_supplies')}
+
 )
 
 select * from supplies

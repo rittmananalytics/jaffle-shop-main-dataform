@@ -2,9 +2,11 @@ config {
   type: "table"
 }
 
-with products as (
-    
-    select * from ${ref('stg_products')}
+with
+
+products as (
+
+    select * from ${ref('source_stg_products')}
 
 )
 
